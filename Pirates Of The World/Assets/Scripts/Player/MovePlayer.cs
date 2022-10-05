@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    //MoveForward e Rotate
     [SerializeField] private Vector2 direction;
-    [SerializeField] private Vector3 rotation;
     [SerializeField] private Rigidbody2D rbPlayer;
     public float speed;
      
@@ -14,52 +12,39 @@ public class MovePlayer : MonoBehaviour
     void Start()
     {
         rbPlayer = GetComponent<Rigidbody2D>();
-    }
-
-    private void FixedUpdate()
-    {
-        rbPlayer.MovePosition(rbPlayer.position + direction * speed * Time.deltaTime);
-    }
-
-   
+    }   
     void Update()
     {
         InputPlayer();
-        RotationPlayer();
     }
 
     void InputPlayer()
     {
-        direction = Vector2.zero;
-
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            direction += Vector2.left;
+            transform.Rotate(0, 0, -2.7f);
+
+            if(transform.rotation.z == -180)
+            {
+                transform.rotation = new Quaternion(0, 0, -180, 0);
+            }
         }
-        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            direction += Vector2.down;
-        }
-        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            direction += Vector2.right;
-        }
+
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            direction += Vector2.up;
+            transform.Translate(0, -speed * Time.deltaTime, 0);
+        }
+
+        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Rotate(0, 0, 2.7f);
+
+            if(transform.rotation.z == 180)
+            {
+                transform.rotation = new Quaternion(0, 0, 180, 0);
+            }
         }
         
     }
 
-    void RotationPlayer()
-    {
-        rotation = Input.mousePosition / 100;
-
-        Vector3 posInitial = rotation - new Vector3(9, 5, 0);
-
-        if(posInitial.x > transform.position.x)
-        {
-
-        }
-    }
 }
