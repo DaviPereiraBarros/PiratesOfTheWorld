@@ -9,6 +9,7 @@ public class GUI_Player : MonoBehaviour
     public Sprite[] statusShip;
     public SpriteRenderer shipAtual;
     public GameObject gameOver;
+    public GameObject objAnimation;    
     public float currentLife;
     
     void Start()
@@ -20,7 +21,7 @@ public class GUI_Player : MonoBehaviour
     void Update()
     {
         Damage();
-        Death();
+        Death(4);
         lifeImg.fillAmount = currentLife / 100;
     }
 
@@ -42,11 +43,14 @@ public class GUI_Player : MonoBehaviour
         }
     }
 
-    private void Death()
+    private void Death(float time)
     {
         if(currentLife == 0)
         {
-           gameOver.SetActive(true);
+           objAnimation.SetActive(true);
+           time -= 0.2f;
         }
     }
+
+
 }
