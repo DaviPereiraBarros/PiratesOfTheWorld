@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class TimeSession : MonoBehaviour
 {
     public Text textTime;
+    public Text textFinish;
+    public Text textShadowFinish;
+    public GameObject panelFinish;
     public float time;
     public float timeMax;
     
@@ -17,10 +20,10 @@ public class TimeSession : MonoBehaviour
     
     void Update()
     {
-        MaxTime();
+        Session();
     }
 
-    private void MaxTime()
+    private void Session()
     {
         time = time + Time.deltaTime / 100;
 
@@ -38,6 +41,25 @@ public class TimeSession : MonoBehaviour
         if(time >= timeMax)
         {
             time = timeMax;
+
+            textFinish.text = "FINISH";
+
+            textShadowFinish.text = "FINISH";
+
+            panelFinish.SetActive(true);
         }
+
+        /*if(time >= 0.6f)
+        {
+            textTime.text = time.ToString("1" + ":" + time);
+        }*/
     }
+
+   /* public IEnumerator SecondsAndMin(int minutes)
+    {
+        minutes += 1;
+        textTime.text = time.ToString(minutes + ":" + time);
+
+        yield return new WaitForSeconds(time);
+    }*/
 }

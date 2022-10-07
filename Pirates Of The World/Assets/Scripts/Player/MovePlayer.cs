@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    [SerializeField] private Vector2 direction;
+    public static MovePlayer instancePlayer;
+
+    private void Awake()
+    {
+        instancePlayer = this;
+    }
+
     [SerializeField] private Rigidbody2D rbPlayer;
     public float speed;
      
@@ -24,7 +30,7 @@ public class MovePlayer : MonoBehaviour
         {
             transform.Rotate(0, 0, -2.7f);
 
-            if(transform.rotation.z == -180)
+            if(transform.rotation.z <= -180)
             {
                 transform.rotation = new Quaternion(0, 0, -180, 0);
             }
@@ -39,7 +45,7 @@ public class MovePlayer : MonoBehaviour
         {
             transform.Rotate(0, 0, 2.7f);
 
-            if(transform.rotation.z == 180)
+            if(transform.rotation.z >= 180)
             {
                 transform.rotation = new Quaternion(0, 0, 180, 0);
             }

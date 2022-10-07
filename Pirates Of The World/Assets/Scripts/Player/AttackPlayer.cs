@@ -54,8 +54,8 @@ public class AttackPlayer : MonoBehaviour
 
     private void TrippleBullet()
     {
-       Rigidbody2D bulletClone = Instantiate(bullet, attkUlt.transform.position, transform.rotation);
-       bulletClone.velocity = transform.position * speedBullet * Time.deltaTime;
+       Rigidbody2D bulletClone = Instantiate(bullet, attkUlt.transform.position, attkUlt.transform.rotation);
+       bulletClone.velocity = attkUlt.transform.position  * speedBullet * Time.deltaTime;
        
     }
 
